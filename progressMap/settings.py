@@ -9,3 +9,9 @@ class Config(object):
 
 class DevelopmentConfig(Config):
     DEBUG_TB_INTERCEPT_REDIRECTS=False
+
+class ProductionConfig(Config):
+    DEBUG=False
+    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL')
+    SQLALCHEMY_RECORD_QUERIES = False
+    
