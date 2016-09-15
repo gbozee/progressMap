@@ -4,6 +4,7 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_debugtoolbar import DebugToolbarExtension
 from flask_login import LoginManager
+from opbeat.contrib.flask import Opbeat
 
 
 app = Flask(__name__)
@@ -35,3 +36,10 @@ app.register_blueprint(curriculums_blueprint, url_prefix='/curriculums')
 app.register_blueprint(questions_blueprint, url_prefix='/questions')
 app.register_blueprint(user_blueprint, url_prefix='/user')
 
+if os.getenv('FLASK_CONFIGURATION',''):
+    opbeat = Opbeat(
+            app,
+            organization_id='f077189cab044c75b53ec8de6eca105f',
+            app_id='382cb74964',
+            secret_token='598244a4e1b1fb617ef2bb989c137c0d465fcf85'
+    )
